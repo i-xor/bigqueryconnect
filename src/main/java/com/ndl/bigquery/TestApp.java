@@ -23,7 +23,8 @@ public class TestApp {
         Properties prop = new Properties();
         prop.load(propertyFile);
         String query = prop.getProperty("query");
-        BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+        String projectId = prop.getProperty("projectId");
+        BigQuery bigquery = BigQueryOptions.newBuilder().setProjectId(projectId).build().getService();
         QueryJobConfiguration queryConfig =
                 QueryJobConfiguration.newBuilder(query)
                         // Use standard SQL syntax for queries.
